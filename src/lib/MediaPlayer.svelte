@@ -84,6 +84,18 @@
 		}
 	}
 
+	function play() {
+		dispatch('play');
+	}
+
+	function pause() {
+		dispatch('pause');
+	}
+
+	function ended() {
+		dispatch('ended');
+	}
+
 	function timeUpdate() {
 		currentTime = videoEl.currentTime;
 		dispatch('timeupdate', { detail: { currentTime: videoEl.currentTime } });
@@ -128,9 +140,9 @@
 		{autoplay}
 		{loop}
 		{muted}
-		on:play={() => dispatch('play')}
-		on:pause={() => dispatch('pause')}
-		on:ended={() => dispatch('ended')}
+		on:play={play}
+		on:pause={pause}
+		on:ended={ended}
 		on:timeupdate={timeUpdate}
 		on:volumechange={volumeChange}
 		on:ratechange={playbackRateChange}
