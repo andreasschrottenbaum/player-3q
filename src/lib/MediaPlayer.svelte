@@ -45,7 +45,7 @@
 
 			dispatch('ui.hide');
 			hideUI = true;
-		}, 3000);
+		}, 5000);
 	}
 
 	function playPauseRepeat() {
@@ -105,6 +105,10 @@
 		if (controls) {
 			hideUI = false;
 		}
+
+		if (!poster) {
+			poster = `//unsplash.it/${videoEl.clientWidth}/${videoEl.clientHeight}`;
+		}
 	});
 </script>
 
@@ -145,9 +149,9 @@
 	</video>
 
 	<div class="full">
-		<button on:click={playPauseRepeat} class="bigPlay"
-			><Fa icon={paused ? faPlay : faPause} /></button
-		>
+		<button on:click={playPauseRepeat} class="bigPlay">
+			<Fa icon={paused ? faPlay : faPause} />
+		</button>
 	</div>
 
 	<div class="top"></div>
@@ -174,6 +178,7 @@
 	.player {
 		position: relative;
 		margin: 1em;
+		width: 100%;
 	}
 
 	video {

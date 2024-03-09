@@ -3,5 +3,5 @@
 </script>
 
 <main>
-	<MediaPlayer src="./example.mp4" poster="//unsplash.it/900/500" />
+	<MediaPlayer src="./example.mp4" />
 </main>
