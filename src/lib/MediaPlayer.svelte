@@ -148,7 +148,6 @@
 		on:seeking={() => dispatch('seeking')}
 		on:seeked={() => dispatch('seeked')}
 		on:progress={() => dispatch('progress')}
-		on:suspend={() => dispatch('suspend')}
 	>
 		<track kind="captions" />
 	</video>
