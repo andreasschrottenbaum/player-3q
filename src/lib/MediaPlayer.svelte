@@ -71,37 +71,37 @@
 
 	function setVolume(event: CustomEvent<{ newVolume: number }>) {
 		videoEl.volume = event.detail.newVolume;
-		dispatch('media.volumechange', { detail: { volume: event.detail.newVolume } });
+		dispatch('volumechange', { detail: { volume: event.detail.newVolume } });
 	}
 
 	function toggleFullscreen() {
 		if (document.fullscreenElement) {
 			document.exitFullscreen();
-			dispatch('media.fullscreenchange', { detail: { fullscreen: false } });
+			dispatch('fullscreenchange', { detail: { fullscreen: false } });
 		} else {
 			rootEl.requestFullscreen();
-			dispatch('media.fullscreenchange', { detail: { fullscreen: true } });
+			dispatch('fullscreenchange', { detail: { fullscreen: true } });
 		}
 	}
 
 	function timeUpdate() {
 		currentTime = videoEl.currentTime;
-		dispatch('media.timechange', { detail: { currentTime: videoEl.currentTime } });
+		dispatch('timeupdate', { detail: { currentTime: videoEl.currentTime } });
 	}
 
 	function volumeChange() {
 		volume = videoEl.volume;
-		dispatch('media.volumechange', { detail: { volume: videoEl.volume } });
+		dispatch('volumechange', { detail: { volume: videoEl.volume } });
 	}
 
 	function durationChange() {
 		duration = videoEl.duration;
-		dispatch('media.durationchange', { detail: { duration: videoEl.duration } });
+		dispatch('durationchange', { detail: { duration: videoEl.duration } });
 	}
 
 	function playbackRateChange() {
 		playbackRate = videoEl.playbackRate;
-		dispatch('media.playbackratechange', { detail: { playbackRate: videoEl.playbackRate } });
+		dispatch('ratechange', { detail: { playbackRate: videoEl.playbackRate } });
 	}
 
 	onMount(() => {
