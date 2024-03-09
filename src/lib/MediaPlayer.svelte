@@ -7,46 +7,27 @@
 	import Fa from 'svelte-fa';
 	import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 
-	// Source of the video
 	export let src = '';
-
-	// Poster image for the video
 	export let poster = '';
-	// Autoplay option for the video
 	export let autoplay = false;
-	// Controls option for the video
 	export let controls = false;
-	// Current time of the video
 	export let currentTime = 0;
-	// Duration of the video
 	export let duration = 0;
-	// Loop option for the video
 	export let loop = false;
-	// Muted option for the video
 	export let muted = false;
-	// Paused state of the video
 	export let paused = !autoplay;
-	// Playback rate of the video
 	export let playbackRate = 1;
-	// Preload option for the video
 	export let preload = 'auto';
-	// Volume of the video
 	export let volume = 1;
 
-	// Root element of the player
 	let rootEl: HTMLElement;
-	// Video element of the player
 	let videoEl: HTMLMediaElement;
 
-	// UI visibility state
 	let hideUI: boolean = true;
 
-	// Event dispatcher for the player
 	const dispatch = createEventDispatcher();
 
-	// Timeout for hiding the UI
 	let uiTimeout: NodeJS.Timeout;
-	// Function to toggle the UI visibility
 	function toggleUI() {
 		hideUI = false;
 
@@ -63,7 +44,6 @@
 		}, 5000);
 	}
 
-	// Function to play, pause, or repeat the video
 	function playPauseRepeat() {
 		if (videoEl.currentTime === videoEl.duration) {
 			videoEl.currentTime = 0;
@@ -81,18 +61,15 @@
 		}
 	}
 
-	// Function to seek the video
 	function seek(event: CustomEvent<{ newTime: number }>) {
 		videoEl.currentTime = event.detail.newTime;
 	}
 
-	// Function to set the volume of the video
 	function setVolume(event: CustomEvent<{ newVolume: number }>) {
 		videoEl.volume = event.detail.newVolume;
 		dispatch('volumechange', { detail: { volume: event.detail.newVolume } });
 	}
 
-	// Function to toggle fullscreen
 	function toggleFullscreen() {
 		if (document.fullscreenElement) {
 			document.exitFullscreen();
@@ -103,46 +80,38 @@
 		}
 	}
 
-	// Function to dispatch play event
 	function play() {
 		dispatch('play');
 	}
 
-	// Function to dispatch pause event
 	function pause() {
 		dispatch('pause');
 	}
 
-	// Function to dispatch ended event
 	function ended() {
 		dispatch('ended');
 	}
 
-	// Function to dispatch timeupdate event
 	function timeUpdate() {
 		currentTime = videoEl.currentTime;
 		dispatch('timeupdate', { detail: { currentTime: videoEl.currentTime } });
 	}
 
-	// Function to dispatch volumechange event
 	function volumeChange() {
 		volume = videoEl.volume;
 		dispatch('volumechange', { detail: { volume: videoEl.volume } });
 	}
 
-	// Function to dispatch durationchange event
 	function durationChange() {
 		duration = videoEl.duration;
 		dispatch('durationchange', { detail: { duration: videoEl.duration } });
 	}
 
-	// Function to dispatch ratechange event
 	function playbackRateChange() {
 		playbackRate = videoEl.playbackRate;
 		dispatch('ratechange', { detail: { playbackRate: videoEl.playbackRate } });
 	}
 
-	// On mount, set the poster if not provided and set the UI visibility based on the controls option
 	onMount(() => {
 		if (controls) {
 			hideUI = false;
@@ -157,9 +126,7 @@
 <!-- HTML start -->
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<!-- Root element of the player -->
 <div bind:this={rootEl} class:hideUI class="player" on:mousemove={toggleUI} role="application">
-	<!-- Video element of the player -->
 	<video
 		bind:this={videoEl}
 		{src}
@@ -193,23 +160,18 @@
 		<track kind="captions" />
 	</video>
 
-	<!-- Play/Pause button -->
 	<div class="full">
 		<button on:click={playPauseRepeat} class="bigPlay">
 			<Fa icon={paused ? faPlay : faPause} />
 		</button>
 	</div>
 
-	<!-- Top overlay -->
 	<div class="top"></div>
 
-	<!-- Left overlay -->
 	<div class="left"></div>
 
-	<!-- Right overlay -->
 	<div class="right"></div>
 
-	<!-- Bottom overlay with controls -->
 	<div class="bottom">
 		<Controls
 			on:play={playPauseRepeat}
@@ -226,7 +188,6 @@
 
 <!-- HTML end -->
 
-<!-- Styles for the player -->
 <style lang="scss">
 	.player {
 		position: relative;

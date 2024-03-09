@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Importing necessary modules and components
 	import Fa from 'svelte-fa';
 	import { faGear } from '@fortawesome/free-solid-svg-icons';
 </script>
@@ -7,11 +6,9 @@
 <!-- HTML start -->
 
 <div class="settings">
-	<!-- Button to open the settings menu -->
 	<button><Fa icon={faGear} /></button>
 
 	<div class="submenu">
-		<!-- List of settings options -->
 		<ul>
 			<li>Quality</li>
 			<li>Speed</li>

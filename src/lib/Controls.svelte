@@ -1,26 +1,21 @@
 <script lang="ts">
-	// Importing necessary modules and components
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { faPlay, faPause, faExpand } from '@fortawesome/free-solid-svg-icons';
 	import Volume from './Controls/Volume.svelte';
 	import Settings from './Controls/Settings.svelte';
 
-	// Exporting variables to be used in the component
 	export let currentTime = 0;
 	export let duration = 0;
 	export let paused = true;
 	export let volume = 1;
 
-	// Creating an event dispatcher
 	const dispatch = createEventDispatcher();
 
-	// Function to handle play event
 	function handlePlay() {
 		dispatch('play');
 	}
 
-	// Function to handle seek event
 	function handleSeek(event: Event) {
 		// @ts-ignore
 		const newTime = event.target!.value;
@@ -28,25 +23,21 @@
 		dispatch('seek', { newTime });
 	}
 
-	// Function to handle volume event
 	function handleVolume(event: CustomEvent<{ newVolume: number }>) {
 		const newVolume = event.detail.newVolume;
 		volume = newVolume;
 		dispatch('volume', { newVolume });
 	}
 
-	// Function to toggle fullscreen
 	function toggleFullscreen() {
 		dispatch('fullscreen');
 	}
 
-	// Creating a new date format
 	const intl = new Intl.DateTimeFormat('en-EN', {
 		minute: '2-digit',
 		second: '2-digit'
 	});
 
-	// Formatting the current time and duration
 	$: currentTimeDisplay = intl.format(currentTime * 1000);
 	$: durationDisplay = intl.format(duration * 1000);
 </script>
@@ -54,26 +45,20 @@
 <!-- HTML start -->
 
 <div>
-	<!-- Input for seeking through the video -->
 	<input type="range" min="0" max={duration} value={currentTime} on:change={handleSeek} />
 </div>
 
 <div class="bottom">
 	<div>
-		<!-- Button to play/pause the video -->
 		<button on:click={handlePlay}><Fa icon={paused ? faPlay : faPause} /></button>
-		<!-- Displaying the current time and duration -->
 		<span>{currentTimeDisplay}</span>
 		/
 		<span>{durationDisplay}</span>
-		<!-- Volume control -->
 		<Volume on:volume={handleVolume} />
 	</div>
 
 	<div>
-		<!-- Settings button -->
 		<Settings />
-		<!-- Button to toggle fullscreen -->
 		<button on:click={toggleFullscreen}><Fa icon={faExpand} /></button>
 	</div>
 </div>
