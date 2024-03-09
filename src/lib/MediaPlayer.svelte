@@ -69,6 +69,18 @@
 		videoEl.currentTime = event.detail.newTime;
 	}
 
+	function setVolume(event: CustomEvent<{ newVolume: number }>) {
+		videoEl.volume = event.detail.newVolume;
+	}
+
+	function toggleFullscreen() {
+		if (document.fullscreenElement) {
+			document.exitFullscreen();
+		} else {
+			rootEl.requestFullscreen();
+		}
+	}
+
 	function timeUpdate() {
 		currentTime = videoEl.currentTime;
 		dispatch('media.timechange', { detail: { currentTime: videoEl.currentTime } });
@@ -145,7 +157,16 @@
 	<div class="right"></div>
 
 	<div class="bottom">
-		<Controls on:play={playPauseRepeat} on:seek={seek} {currentTime} {duration} {paused} />
+		<Controls
+			on:play={playPauseRepeat}
+			on:seek={seek}
+			on:volume={setVolume}
+			on:fullscreen={toggleFullscreen}
+			{currentTime}
+			{duration}
+			{paused}
+			{volume}
+		/>
 	</div>
 </div>
 

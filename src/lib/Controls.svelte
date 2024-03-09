@@ -2,17 +2,13 @@
 	import { createEventDispatcher } from 'svelte';
 
 	import Fa from 'svelte-fa';
-	import {
-		faPlay,
-		faPause,
-		faGear,
-		faVolumeHigh,
-		faExpand
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faPlay, faPause, faGear, faExpand } from '@fortawesome/free-solid-svg-icons';
+	import Volume from './Controls/Volume.svelte';
 
 	export let currentTime = 0;
 	export let duration = 0;
 	export let paused = true;
+	export let volume = 1;
 
 	const dispatch = createEventDispatcher();
 
@@ -23,7 +19,19 @@
 	function handleSeek(event: Event) {
 		// @ts-ignore
 		const newTime = event.target!.value;
+		currentTime = newTime;
 		dispatch('seek', { newTime });
+	}
+
+	function handleVolume(event: Event) {
+		// @ts-ignore
+		const newVolume = event.detail!.newVolume;
+		volume = newVolume;
+		dispatch('volume', { newVolume });
+	}
+
+	function toggleFullscreen() {
+		dispatch('fullscreen');
 	}
 
 	const intl = new Intl.DateTimeFormat('en-EN', {
@@ -45,13 +53,13 @@
 		<span>{currentTimeDisplay}</span>
 		/
 		<span>{durationDisplay}</span>
-		<button><Fa icon={faVolumeHigh} /></button>
+		<Volume on:volume={handleVolume} />
 	</div>
 
 	<div>
 		<!-- <button>Subtitles</button> -->
 		<button><Fa icon={faGear} /></button>
-		<button><Fa icon={faExpand} /></button>
+		<button on:click={toggleFullscreen}><Fa icon={faExpand} /></button>
 	</div>
 </div>
 
