@@ -2,8 +2,9 @@
 	import { createEventDispatcher } from 'svelte';
 
 	import Fa from 'svelte-fa';
-	import { faPlay, faPause, faGear, faExpand } from '@fortawesome/free-solid-svg-icons';
+	import { faPlay, faPause, faExpand } from '@fortawesome/free-solid-svg-icons';
 	import Volume from './Controls/Volume.svelte';
+	import Settings from './Controls/Settings.svelte';
 
 	export let currentTime = 0;
 	export let duration = 0;
@@ -58,7 +59,7 @@
 
 	<div>
 		<!-- <button>Subtitles</button> -->
-		<button><Fa icon={faGear} /></button>
+		<Settings />
 		<button on:click={toggleFullscreen}><Fa icon={faExpand} /></button>
 	</div>
 </div>
