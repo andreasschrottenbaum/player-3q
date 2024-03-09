@@ -24,9 +24,8 @@
 		dispatch('seek', { newTime });
 	}
 
-	function handleVolume(event: Event) {
-		// @ts-ignore
-		const newVolume = event.detail!.newVolume;
+	function handleVolume(event: CustomEvent<{ newVolume: number }>) {
+		const newVolume = event.detail.newVolume;
 		volume = newVolume;
 		dispatch('volume', { newVolume });
 	}

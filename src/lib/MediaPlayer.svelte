@@ -71,13 +71,16 @@
 
 	function setVolume(event: CustomEvent<{ newVolume: number }>) {
 		videoEl.volume = event.detail.newVolume;
+		dispatch('media.volumechange', { detail: { volume: event.detail.newVolume } });
 	}
 
 	function toggleFullscreen() {
 		if (document.fullscreenElement) {
 			document.exitFullscreen();
+			dispatch('media.fullscreenchange', { detail: { fullscreen: false } });
 		} else {
 			rootEl.requestFullscreen();
+			dispatch('media.fullscreenchange', { detail: { fullscreen: true } });
 		}
 	}
 
