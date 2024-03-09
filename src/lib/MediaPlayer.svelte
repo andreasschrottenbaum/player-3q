@@ -115,6 +115,8 @@
 	});
 </script>
 
+<!-- HTML start -->
+
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div bind:this={rootEl} class:hideUI class="player" on:mousemove={toggleUI} role="application">
 	<video
@@ -176,6 +178,8 @@
 		/>
 	</div>
 </div>
+
+<!-- HTML end -->
 
 <style lang="scss">
 	.player {

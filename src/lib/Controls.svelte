@@ -43,6 +43,8 @@
 	$: durationDisplay = intl.format(duration * 1000);
 </script>
 
+<!-- HTML start -->
+
 <div>
 	<input type="range" min="0" max={duration} value={currentTime} on:change={handleSeek} />
 </div>
@@ -57,11 +59,12 @@
 	</div>
 
 	<div>
-		<!-- <button>Subtitles</button> -->
 		<Settings />
 		<button on:click={toggleFullscreen}><Fa icon={faExpand} /></button>
 	</div>
 </div>
+
+<!-- HTML end -->
 
 <style>
 	input[type='range'] {

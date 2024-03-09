@@ -16,10 +16,14 @@
 	}
 </script>
 
+<!-- HTML start -->
+
 <div>
 	<Fa icon={faVolumeHigh} />
 	<input type="range" min="0" max="1" step="0.01" on:change={setVolume} />
 </div>
+
+<!-- HTML end -->
 
 <style>
 	div {

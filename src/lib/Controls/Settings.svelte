@@ -3,6 +3,8 @@
 	import { faGear } from '@fortawesome/free-solid-svg-icons';
 </script>
 
+<!-- HTML start -->
+
 <div class="settings">
 	<button><Fa icon={faGear} /></button>
 
@@ -14,6 +16,8 @@
 		</ul>
 	</div>
 </div>
+
+<!-- HTML end -->
 
 <style lang="scss">
 	button {
